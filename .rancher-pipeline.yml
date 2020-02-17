@@ -1,0 +1,12 @@
+stages:
+- name: Publish
+  steps:
+  - publishImageConfig:
+      dockerfilePath: ./Dockerfile
+      buildContext: .
+      tag: nginx-html:${CICD_EXECUTION_SEQUENCE}
+      registry: 127.0.0.1:34287
+- name: Deploy
+  steps:
+  - applyYamlConfig:
+      path: ./deployment.yaml
